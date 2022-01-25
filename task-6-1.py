@@ -6,6 +6,7 @@
 # переключение между режимами должно осуществляться только в указанном порядке (красный, жёлтый, зелёный);
 # проверить работу примера, создав экземпляр и вызвав описанный метод.
 # Задачу можно усложнить, реализовав проверку порядка режимов. При его нарушении выводить соответствующее сообщение и завершать скрипт.
+import time
 
 class TrafficLight:
     _color: str
@@ -15,8 +16,22 @@ class TrafficLight:
 
     def running(self):
         if self._color == "красный":
-            pass
-        elif self._color == "желтый":
-            pass
-        elif self._color == "зеленый"
-            pass
+            for x in range(1, 8):
+                time.sleep(1)
+                print(f"красный ({x})")
+            self._color = "желтый"
+
+        if self._color == "желтый":
+            for x in range(1, 3):
+                time.sleep(1)
+                print(f"желтый ({x})")
+            self._color = "зеленый"
+
+        if self._color == "зеленый":
+            for x in range(1, 6):
+                time.sleep(1)
+                print(f"зеленый ({x})")
+
+
+svetofor_111 = TrafficLight("красный")
+svetofor_111.running()
