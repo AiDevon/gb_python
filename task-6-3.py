@@ -23,7 +23,13 @@ class Worker:
 class Position(Worker):
 
     def get_full_name(self):
-        pass
+        return f"{self.name} {self.surname}"
 
     def get_total_income(self):
-        pass
+        income = self._income["wage"] + self._income["bonus"]
+        print(f"Доход {income}")
+
+vasya_income = {"wage": 100000, "bonus": 20000}
+vasya = Position("Вася", "Про", "Прогер", vasya_income)
+print(vasya.get_full_name())
+vasya.get_total_income()
