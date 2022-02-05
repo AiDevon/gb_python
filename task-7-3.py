@@ -29,29 +29,80 @@
 class Cell:
     _cells: int
 
-    def __init__(self, cells: int = 0):
+    def __init__(self, cells: int = 1):
         self._cells = cells
+
+    def __str__(self):
+        return f"{self._cells}"
 
     # Сложение. Объединение двух клеток.
     # При этом число ячеек общей клетки должно равняться сумме ячеек исходных двух клеток.
     def __add__(self, other):
         if isinstance(other, Cell):
-            return self._cells + other._cells
+            return Cell(self._cells + other._cells)
+        else:
+            return None
 
     # Операцию необходимо выполнять только если разность количества ячеек двух клеток больше нуля,
     # иначе выводить соответствующее сообщение.
     def __sub__(self, other):
-        pass
+        if isinstance(other, Cell):
+            if (self._cells - other._cells) > 0:
+                return Cell(self._cells - other._cells)
+            elif (other._cells - self._cells) > 0:
+                return Cell(other._cells - self._cells)
+            else:
+                print("Разность количества ячеек двух клеток меньше нуля")
+                return None
+        else:
+            return None
 
     # Умножение. Создаётся общая клетка из двух.
     # Число ячеек общей клетки определяется как произведение количества ячеек этих двух клеток.
     def __mul__(self, other):
-        pass
+        if isinstance(other, Cell):
+            return Cell(self._cells * other._cells)
+        else:
+            return None
 
     # Деление. Создаётся общая клетка из двух.
     # Число ячеек общей клетки определяется как целочисленное деление количества ячеек этих двух клеток.
     def __truediv__(self, other):
-        pass
+        if isinstance(other, Cell):
+            if (self._cells // other._cells) > 0:
+                return Cell(self._cells // other._cells)
+            elif (other._cells // self._cells) > 0:
+                return Cell(other._cells // self._cells)
+            else:
+                print("Деление меньше 1")
+                return None
+        else:
+            return None
 
-    def make_order(self):
-        pass
+    def make_order(self, count: int):
+        order_str = ""
+        for n in range(1, (self._cells // count)+1):
+            order_str += count * "*" + "\\n"
+        if (self._cells % count) > 0:
+            order_str += (self._cells % count) * "*"
+        else:
+            order_str = order_str[:-2]
+        print(order_str)
+
+one = Cell(15)
+two = Cell(3)
+three = Cell()
+
+three = one + two
+print(f"{one} + {two} = {one + two}")
+
+three = one - two
+print(f"{one} - {two} = {one - two}")
+
+three = one * two
+print(f"{one} * {two} = {one * two}")
+
+three = one / two
+print(f"{one} / {two} = {one / two}")
+
+one.make_order(5)

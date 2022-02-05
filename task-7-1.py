@@ -18,13 +18,34 @@ class Matrix:
         self._arg_list = arg_list
 
     def __str__(self):
-        for l in self._arg_list:
-            print(l)
+        result_str = ""
+        for line in self._arg_list:
+            for col in line:
+                result_str += f"{col}    "
+            result_str += "\n"
+        return result_str
 
     def __add__(self, other):
-        pass
+        try:
+            line_count = len(self._arg_list)
+            column_count = len(self._arg_list[0])
+            result_list = []
+            for line in range(0,line_count):
+                temp_line = []
+                for column in range(0,column_count):
+                    temp_line.append(self._arg_list[line][column] + other._arg_list[line][column])
+                result_list.append(temp_line)
+            return Matrix(result_list)
+        except:
+            print("Не верные данные")
 
-mat_3_2 = Matrix([[31, 32],
-                  [37, 43],
-                  [51, 86]])
-print(mat_3_2)
+matrix_one = Matrix([[1, 2],
+                  [3, 4],
+                  [5, 6]])
+
+matrix_two = Matrix([[7, 8],
+                  [9, 10],
+                  [11, 12]])
+
+matrix_tree = matrix_one + matrix_two
+print(matrix_tree)

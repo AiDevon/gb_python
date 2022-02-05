@@ -9,33 +9,45 @@
 # Проверить на практике полученные на этом уроке знания:
 # реализовать абстрактные классы для основных классов проекта, проверить на практике работу декоратора @property.
 
+from abc import ABC, abstractmethod
 
-class Clothes:
+
+class Clothes(ABC):
     _name: str
-    def __init__(self, name):
+
+    def __init__(self, name: str):
         self._name = name
+
+    @abstractmethod
+    def fabric_consumption(self):
+        pass
+
 
 class Coat(Clothes):
     _size: int
-    def __init__(self,name,size):
+
+    def __init__(self, name: str, size: int):
         super().__init__(name)
         self._size = size
 
     @property
     def fabric_consumption(self):
-        v = self._size/6.5 + 0.5
+        v = self._size / 6.5 + 0.5
         print(f"Расход ткани у пальто модель '{self._name}' = {v}")
+
 
 class Suit(Clothes):
     _growth: int
-    def __init__(self,name,growth):
+
+    def __init__(self, name: str, growth: int):
         super().__init__(name)
         self._growth = growth
 
     @property
     def fabric_consumption(self):
-        h = 2*self._growth + 0.3
+        h = 2 * self._growth + 0.3
         print(f"Расход ткани у костюма модель '{self._name}'= {h}")
+
 
 class CompositClothes(Clothes):
     def __init__(self, children: list):
@@ -45,8 +57,9 @@ class CompositClothes(Clothes):
         for item in self.children:
             item.fabric_consumption
 
-one = Coat("one",100)
-two = Suit("two",50)
+
+one = Coat("one", 100)
+two = Suit("two", 50)
 # one.fabric_consumption
 # two.fabric_consumption
 
