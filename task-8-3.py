@@ -10,3 +10,27 @@
 # Вносить его в список, только если введено число.
 # Класс-исключение должен не позволить пользователю ввести текст (не число) и отобразить соответствующее сообщение.
 # При этом работа скрипта не должна завершаться.
+
+class MyExection(Exception):
+    def __init__(self, message):
+        super().__init__(message)
+
+def check_strig(string):
+    if string.isdigit():
+        return int(string)
+    else:
+        raise MyExection("Ошибка ввода!!")
+
+list = []
+while True:
+    input_data = input("Введите число >>> ")
+    if input_data == "stop":
+        break
+    else:
+        try:
+            list.append(check_strig(input_data))
+        except MyExection:
+            print("Ошибка ввода!")
+            continue
+
+print(f"{list}")
