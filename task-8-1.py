@@ -17,25 +17,9 @@ class date:
     @classmethod
     def data_validation(cls,date_string: str):
         date_list = cls.date_to_int(date_string)
-        if len(date_list) == 3:
-            if 1 < date_list[0] <= 31:
-                print("дата ок")
-            else:
-                print("Не верные входные данные")
-                exit()
-            if 1 < date_list[1] < 12:
-                print("месяц ок")
-            else:
-                print("Не верные входные данные")
-                exit()
-            if 1 < date_list[2] < 9999:
-                print("год ок")
-            else:
-                print("Не верные входные данные")
-                exit()
-        else:
-            print("Не верные входные данные")
-            exit()
+        assert 1 <= date_list[0] <= 31, "Не верные входные данные числа"
+        assert 1 <= date_list[1] <= 12, "Не верные входные данные месяца"
+        assert 1147 <= date_list[2] <= 2022, "Не верные входные данные год"
         print(date_list)
 
-date.data_validation("31-02-2022")
+date.data_validation("31-12-2222")
